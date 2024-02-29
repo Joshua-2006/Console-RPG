@@ -6,13 +6,21 @@ namespace Console_RPG
 {
     class Location
     {
+        public static Location CandyCastle = new Location("The Candy Castle", "King Cookie's castle. A place... that has been corrupted. The candy people here are not happy.", new Battle(new List<Enemy>() { Enemy.CandySoldier, Enemy.KingCookie, Enemy.CandyKnight}));
+        public static Location RotLair = new Location("The Rot Lair", "A lair of pure evil and corruption. The \"root\" of all evil. We should probably not be here yet.");
+        public static Location FruitLand = new Location("Fruitland", "A land that can resist the corruption. Full of fruit people like you.");
+        public static Location TheLink = new Location("The Link", "The center of the world, where the lands meet. And where your journey ends.");
+        public static Location HardHouse = new Location("Apple's House", "The start of the journey. A place of happy memories that has not been corrupted yet.");
+
         public string name;
         public string description;
+        public Battle battle;
 
         public Location north, east, south, west;
 
-        public Location(string name, string description)
+        public Location(string name, string description, Battle battle = null)
         {
+            this.battle = battle;
             this.name = name;
             this.description = description;
         }
@@ -25,19 +33,33 @@ namespace Console_RPG
             this.west = west;
 
             if (!(north is null))
+            {
+                this.north = north;
                 north.south = this;
+            }
 
             if (!(east is null))
+            {
+                this.east = east;
                 east.west = this;
+            }
 
             if (!(south is null))
+            {
+                this.south = south;
                 south.north = this;
+            }
 
             if (!(west is null))
+            {
+                this.west = west;
                 west.east = this;
+            }
         }
-        public void Resolve()
+        public void Resolve(List<Player> entities, List<Ally> allies)
         {
+            battle?.Resolve(entities, allies);
+
             Console.WriteLine("You find yourself in " + this.name + ".");
             Console.WriteLine(this.description);
             Console.WriteLine("Type one of the following directions: NORTH, EAST, WEST, SOUTH");
@@ -68,9 +90,9 @@ namespace Console_RPG
             else
             {
                 Console.WriteLine("Try again.");
-                this.Resolve();
+                this.Resolve(entities, allies);
             }
-            nextLocation.Resolve();
+            nextLocation.Resolve(entities, allies);
         }
     }
 }

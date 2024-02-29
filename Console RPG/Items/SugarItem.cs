@@ -4,6 +4,8 @@ namespace Console_RPG
 {
     class SugarItem : Item
     {
+     
+
         public int manaRestoreAmount;
         public int sugarAmount;
         public SugarItem(int shopPrice, int maxAmount, string name, string description, int manaRestoreAmount, int sugarAmount) : base(shopPrice, maxAmount, name, description)

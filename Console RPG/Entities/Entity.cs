@@ -23,6 +23,8 @@ namespace Console_RPG
             this.stats = stats;
           
         }
+
+        public abstract void DoTurn(List<Player> players, List<Ally> allies, List<Enemy> enemies);
         public abstract Entity ChooseTarget(List<Entity> targets);
         public abstract void Attack(Entity target);
 

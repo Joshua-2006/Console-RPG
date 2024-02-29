@@ -4,6 +4,8 @@ namespace Console_RPG
 {
     class CookieItem : Item
     {
+       
+
         public int damage;
         public int amount;
 
