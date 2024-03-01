@@ -6,10 +6,13 @@ namespace Console_RPG
 {
     class Player : Entity
     {
-        public static List<Item> Inventory = new List<Item>();
+        public static List<Item> Inventory = new List<Item>()
+        {
+            CookieItem.BurntCookie, CookieItem.Cookie, SugarItem.ChocolateBar, SugarItem.LegendaryCookie, VitaminItem.VitaminC, VitaminItem.Vitalizer
+        };
 
-         public static Player Apple = new Player("Apple", hp: 100, mana: 100, new Stats(speed: 90, strength: 60, defense: 50), buff: 50, heal: 50);
-         public static Player PrincessAgave = new Player("Princess Agave", 200, 200, new Stats(60, 100, 50), 10, 500);
+         public static Player Apple = new Player("Apple", hp: 100, mana: 100, new Stats(speed: 90, strength: 100, defense: 50), buff: 100, heal: 50);
+         public static Player PrincessAgave = new Player("Princess Agave", 200, 200, new Stats(60, 100, 50), 500, 500);
        
         public int buff;
         public int heal;
@@ -18,12 +21,19 @@ namespace Console_RPG
             this.buff = buff;
             this.heal = heal;
         }
-        public void Buff(Player target)
+        public void Buff(Entity target)
         {
              Stats stats = target.stats;
             int buffs = stats.strength += stats.defense + stats.strength;
             int buffy = stats.strength += buffs;
-            Console.WriteLine(target.name + " had buffed themself for " + buffs + " and gained that much attack!");
+            Console.WriteLine($"{target.name} had buffed themself for {buffs} and now has {stats.strength}!");
+        }
+        public void Heal(Entity target)
+        {
+            Stats stats = target.stats; 
+            int HPRegained = target.currentHP += target.currenMana + stats.strength;
+            int hps = target.currentHP += HPRegained;
+            Console.WriteLine($"{target.name} healed for {hps} and now has {target.currentHP} amount of HP!");
         }
         public override Entity ChooseTarget(List<Entity> choices)
         {
@@ -51,12 +61,15 @@ namespace Console_RPG
         }
         public override void Attack(Entity target)
         {
-            Console.WriteLine(this.name + " attacked " + target.name + "!");
-            
+            Stats strats = this.stats;
+            Stats stats = target.stats;
+            int damage = strats.strength + stats.defense;
+            int hp = target.currentHP -= damage;
+            Console.WriteLine($"{this.name} attacked {target.name} for {damage} amount!");
         }
         public override void DoTurn(List<Player> players, List<Ally> allies, List<Enemy> enemies)
         {
-            Console.WriteLine($"You can choose to ATTACK or USE ITEM");
+            Console.WriteLine($"You can choose to ATTACK, USE ITEM, HEAL, or BUFF");
            string choice = Console.ReadLine();
             if (choice == "ATTACK")
             {
@@ -66,7 +79,8 @@ namespace Console_RPG
             else if(choice == "USE ITEM") 
             {
                 Item item = ChooseItem(Inventory);
-                Console.WriteLine("Would you like to use an ITEM on an ENEMY or a PLAYER");
+                Console.WriteLine("Would you like to use an ITEM on an ENEMY, PLAYER, or ALLY");
+                choice = Console.ReadLine();
                 if (choice == "ENEMY")
                 {
                     Entity target = ChooseTarget(enemies.Cast<Entity>().ToList());
@@ -75,15 +89,31 @@ namespace Console_RPG
                 }
                 else if (choice == "PLAYER")
                 {
-                    Entity target = ChooseTarget(enemies.Cast<Entity>().ToList());
+                    Entity target = ChooseTarget(players.Cast<Entity>().ToList());
                     item.Use(this, target);
                     Inventory.Remove(item);
                 }
-              else
+              else if (choice == "ALLY")
+                {
+                    Entity target = ChooseTarget(allies.Cast<Entity>().ToList());
+                    item.Use(this, target);
+                    Inventory.Remove(item);
+                }
+                else
                {
                     Console.WriteLine("TOO BAD");
                }
                 
+            }
+            else if(choice == "BUFF")
+            {
+                Entity target = ChooseTarget(players.Cast<Entity>().ToList());
+                Buff(target);
+            }
+            else if (choice == "HEAL")
+            {
+                Entity target = ChooseTarget(players.Cast<Entity>().ToList());
+                Heal(target);
             }
             else
             {

@@ -49,7 +49,7 @@ namespace Console_RPG
 
                 if (enemies.TrueForAll(enemy => enemy.currentHP <= 0))
                 {
-                    Console.WriteLine("You actually survived... Congratulations.");
+                    Console.WriteLine($"You actually survived... Congratulations. You also received an item!");
                     break;
                 }
             }

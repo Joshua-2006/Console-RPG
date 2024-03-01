@@ -7,7 +7,7 @@ namespace Console_RPG
     class Location
     {
         public static Location CandyCastle = new Location("The Candy Castle", "King Cookie's castle. A place... that has been corrupted. The candy people here are not happy.", new Battle(new List<Enemy>() { Enemy.CandySoldier, Enemy.KingCookie, Enemy.CandyKnight}));
-        public static Location RotLair = new Location("The Rot Lair", "A lair of pure evil and corruption. The \"root\" of all evil. We should probably not be here yet.");
+        public static Location RotLair = new Location("The Rot Lair", "A lair of pure evil and corruption. The \"root\" of all evil. We should probably not be here yet.", new Battle(new List<Enemy>() { Enemy.Cavitee, Enemy.ToothAche, Enemy.Hole }));
         public static Location FruitLand = new Location("Fruitland", "A land that can resist the corruption. Full of fruit people like you.");
         public static Location TheLink = new Location("The Link", "The center of the world, where the lands meet. And where your journey ends.");
         public static Location HardHouse = new Location("Apple's House", "The start of the journey. A place of happy memories that has not been corrupted yet.");

@@ -25,7 +25,11 @@ namespace Console_RPG
         }
         public override void Attack(Entity target)
         {
-            Console.WriteLine(this.name + " attacked " + target.name + "!");
+            Stats strats = this.stats;
+            Stats stats = target.stats;
+            int damage = strats.strength + stats.defense;
+            int hp = target.currentHP -= damage;
+            Console.WriteLine($"{this.name} attacked {target.name} for {damage} amount!");
         }
     }
 }
