@@ -13,6 +13,7 @@ namespace Console_RPG
        public static Enemy CandyKnight = new Enemy("Candy Knight", 150, 100, new Stats(50, 80, 60), 5, 50);
        public static Enemy Cavitee = new Enemy("Cavitee", 50, 100, new Stats(80, 20, 50), 5, 50);
        public static Enemy Hole = new Enemy("Hole", 10, 0, new Stats(100, 100, 100), 5, 50);
+        public static Enemy TheBonder = new Enemy("The Bonder", 100000, 100000, new Stats(10000, 10000, 10000), 10000, 10000);
 
         public int debuff;
         public int coins;

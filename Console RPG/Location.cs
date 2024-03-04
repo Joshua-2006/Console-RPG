@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Net;
 using System.Text;
 
 namespace Console_RPG
@@ -9,18 +10,18 @@ namespace Console_RPG
         public static Location CandyCastle = new Location("The Candy Castle", "King Cookie's castle. A place... that has been corrupted. The candy people here are not happy.", new Battle(new List<Enemy>() { Enemy.CandySoldier, Enemy.KingCookie, Enemy.CandyKnight}));
         public static Location RotLair = new Location("The Rot Lair", "A lair of pure evil and corruption. The \"root\" of all evil. We should probably not be here yet.", new Battle(new List<Enemy>() { Enemy.Cavitee, Enemy.ToothAche, Enemy.Hole }));
         public static Location FruitLand = new Location("Fruitland", "A land that can resist the corruption. Full of fruit people like you.");
-        public static Location TheLink = new Location("The Link", "The center of the world, where the lands meet. And where your journey ends.");
-        public static Location HardHouse = new Location("Apple's House", "The start of the journey. A place of happy memories that has not been corrupted yet.");
-
-        public string name;
-        public string description;
-        public Battle battle;
+        public static Location TheLink = new Location("The Link", "The center of the world, where the lands meet. And where your journey ends.", new Shop("The Bonder", "Fate's Atlas", new List<Item>() {CookieItem.Cookie, CookieItem.BurntCookie, SugarItem.LegendaryCookie, SugarItem.ChocolateBar, VitaminItem.VitaminC, VitaminItem.Vitalizer  }, "You have quite the journey ahead of you, don't you?", "Perhaps your journey shall end happily."));
+        public static Location HardHouse = new Location("Apple's House", "The start of the journey. A place of happy memories that has not been corrupted yet.");                                        
+                                                                                                                                                                                                         
+        public string name;                                                                                                                                                                              
+        public string description;                                                                                                                                                                       
+        public LocationEvent POI;                                                                                                                                                                        
 
         public Location north, east, south, west;
 
-        public Location(string name, string description, Battle battle = null)
+        public Location(string name, string description,LocationEvent POI = null)
         {
-            this.battle = battle;
+            this.POI = POI;
             this.name = name;
             this.description = description;
         }
@@ -58,7 +59,7 @@ namespace Console_RPG
         }
         public void Resolve(List<Player> entities, List<Ally> allies)
         {
-            battle?.Resolve(entities, allies);
+            POI?.Resolve(entities, allies);
 
             Console.WriteLine("You find yourself in " + this.name + ".");
             Console.WriteLine(this.description);

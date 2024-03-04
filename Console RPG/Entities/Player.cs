@@ -6,10 +6,8 @@ namespace Console_RPG
 {
     class Player : Entity
     {
-        public static List<Item> Inventory = new List<Item>()
-        {
-            CookieItem.BurntCookie, CookieItem.Cookie, SugarItem.ChocolateBar, SugarItem.LegendaryCookie, VitaminItem.VitaminC, VitaminItem.Vitalizer
-        };
+        public static List<Item> Inventory = new List<Item>() { };
+        public static int MONEY = 0;
 
          public static Player Apple = new Player("Apple", hp: 100, mana: 100, new Stats(speed: 90, strength: 100, defense: 50), buff: 100, heal: 50);
          public static Player PrincessAgave = new Player("Princess Agave", 200, 200, new Stats(60, 100, 50), 500, 500);
@@ -24,9 +22,14 @@ namespace Console_RPG
         public void Buff(Entity target)
         {
              Stats stats = target.stats;
-            int buffs = stats.strength += stats.defense + stats.strength;
-            int buffy = stats.strength += buffs;
-            Console.WriteLine($"{target.name} had buffed themself for {buffs} and now has {stats.strength}!");
+                int buffs = stats.strength += stats.strength + stats.strength;
+                int buffy = stats.strength += buffs;
+                int buffer = buffy += buffy;
+                int buffest = buffer += buffer;
+                int buffing = buffest += buffest;
+            buffing + buffing;
+                Console.WriteLine($"{target.name} had buffed themself for {buffing} and now has {stats.strength}!");
+                
         }
         public void Heal(Entity target)
         {
@@ -109,6 +112,7 @@ namespace Console_RPG
             {
                 Entity target = ChooseTarget(players.Cast<Entity>().ToList());
                 Buff(target);
+                DoTurn(players, allies, enemies);
             }
             else if (choice == "HEAL")
             {
