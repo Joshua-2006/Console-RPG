@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.InteropServices;
 
 namespace Console_RPG
 {
@@ -22,13 +23,12 @@ namespace Console_RPG
         public void Buff(Entity target)
         {
              Stats stats = target.stats;
-                int buffs = stats.strength += stats.strength + stats.strength;
+                int buffs = stats.strength += stats.strength * stats.strength;
                 int buffy = stats.strength += buffs;
-                int buffer = buffy += buffy;
-                int buffest = buffer += buffer;
-                int buffing = buffest += buffest;
-            buffing + buffing;
-                Console.WriteLine($"{target.name} had buffed themself for {buffing} and now has {stats.strength}!");
+                
+            
+         
+                Console.WriteLine($"{target.name} had buffed themself for {buffs} and now has {stats.strength}!");
                 
         }
         public void Heal(Entity target)
@@ -72,14 +72,14 @@ namespace Console_RPG
         }
         public override void DoTurn(List<Player> players, List<Ally> allies, List<Enemy> enemies)
         {
-            Console.WriteLine($"You can choose to ATTACK, USE ITEM, HEAL, or BUFF");
+            Console.WriteLine($"You can choose to ATTACK, USE ITEM, HEAL, BUFF, or STATS");
            string choice = Console.ReadLine();
             if (choice == "ATTACK")
             {
-            Entity target = ChooseTarget(enemies.Cast<Entity>().ToList());
-            Attack(target);
+                Entity target = ChooseTarget(enemies.Cast<Entity>().ToList());
+                Attack(target);
             }
-            else if(choice == "USE ITEM") 
+            else if (choice == "USE ITEM")
             {
                 Item item = ChooseItem(Inventory);
                 Console.WriteLine("Would you like to use an ITEM on an ENEMY, PLAYER, or ALLY");
@@ -96,19 +96,19 @@ namespace Console_RPG
                     item.Use(this, target);
                     Inventory.Remove(item);
                 }
-              else if (choice == "ALLY")
+                else if (choice == "ALLY")
                 {
                     Entity target = ChooseTarget(allies.Cast<Entity>().ToList());
                     item.Use(this, target);
                     Inventory.Remove(item);
                 }
                 else
-               {
+                {
                     Console.WriteLine("TOO BAD");
-               }
-                
+                }
+
             }
-            else if(choice == "BUFF")
+            else if (choice == "BUFF")
             {
                 Entity target = ChooseTarget(players.Cast<Entity>().ToList());
                 Buff(target);
@@ -118,6 +118,40 @@ namespace Console_RPG
             {
                 Entity target = ChooseTarget(players.Cast<Entity>().ToList());
                 Heal(target);
+            }
+            else if (choice == "STATS")
+            {
+                Console.WriteLine("Would you like to view a PLAYER, ALLY, or ENEMY's stats?");
+                choice = Console.ReadLine();
+                if (choice == "PLAYER")
+                {
+                    Entity target = ChooseTarget(players.Cast<Entity>().ToList());
+                    Stats stats = target.stats;
+                    Console.WriteLine($"These are {target.name} stats.");
+                    Console.WriteLine($"{target.currentHP}, {stats.strength}, {stats.defense}, {stats.speed}. These are {target.name}'s stats!");
+                    DoTurn(players, allies, enemies);
+                }
+                else if (choice == "ALLY")
+                {
+                    Entity target = ChooseTarget(allies.Cast<Entity>().ToList());
+                    Stats stats = target.stats;
+                    Console.WriteLine($"These are {target.name} stats.");
+                    Console.WriteLine($"{target.currentHP}, {stats.strength}, {stats.defense}, {stats.speed}. These are {target.name}'s stats!");
+                    DoTurn(players, allies, enemies);
+                }
+                else if (choice == "ENEMY")
+                {
+                    Entity target = ChooseTarget(enemies.Cast<Entity>().ToList());
+                    Stats stats = target.stats;
+                    Console.WriteLine($"These are {target.name} stats.");
+                    Console.WriteLine($"{target.currentHP}, {stats.strength}, {stats.defense}, {stats.speed}. These are {target.name}'s stats!");
+                    DoTurn(players, allies, enemies);
+                }
+                else
+                {
+                    DoTurn(players, allies, enemies);
+                }
+
             }
             else
             {

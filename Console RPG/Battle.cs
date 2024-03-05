@@ -43,6 +43,8 @@ namespace Console_RPG
                     if (enemy.currentHP < 0)
                     {
                         Console.WriteLine($"{enemy.name} has died.");
+                        Player.MONEY += enemy.coins;
+                        Console.WriteLine($"You got {enemy.coins} amount of coins! You now have {Player.MONEY} coins!");
                     }
                 }
                 // Allies
