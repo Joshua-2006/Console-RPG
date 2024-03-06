@@ -13,7 +13,7 @@ namespace Console_RPG
        public static Enemy CandyKnight = new Enemy("Candy Knight", 150, 100, new Stats(50, 80, 60), 5, 50);
        public static Enemy Cavitee = new Enemy("Cavitee", 50, 100, new Stats(80, 20, 50), 5, 50);
        public static Enemy Hole = new Enemy("Hole", 10, 0, new Stats(100, 100, 100), 5, 50);
-        public static Enemy TheBonder = new Enemy("The Bonder", 100000, 100000, new Stats(10000, 10000, 10000), 10000, 10000);
+       public static Enemy TheBonder = new Enemy("The Bonder", 100000, 100000, new Stats(10000, 10000, 10000), 10000, 10000);
 
         public int debuff;
         public int coins;
@@ -24,9 +24,8 @@ namespace Console_RPG
         }
         public void DeBuff(Entity target)
         {
-            Stats stats = target.stats;
-            int buffs = stats.strength -= target.currentHP - stats.strength;
-            int buffy = stats.strength -= buffs;
+            
+            int buffs = target.stats.strength -= this.debuff * this.debuff;
             Console.WriteLine($"{target.name} was debuffed for {buffs} and lost that much attack!");
         }
 
@@ -37,9 +36,7 @@ namespace Console_RPG
         }
         public override void Attack(Entity target)
         {
-            Stats strats = this.stats;
-            Stats stats = target.stats;
-            int damage = strats.strength + stats.defense;
+            int damage = this.stats.strength - target.stats.defense;
             int hp = target.currentHP -= damage;
             Console.WriteLine($"{this.name} attacked {target.name} for {damage} amount!");
         }

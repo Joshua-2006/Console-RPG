@@ -16,20 +16,26 @@ namespace Console_RPG
         }
         public override void Resolve(List<Player> players, List<Ally> allies)
         {
+            foreach (var enemy in enemies) 
+            {
+                Console.WriteLine($"You ran into {enemy.name}!");
+            }
             while (true)
             {
                 //pLAYERS
                 foreach (var player in players)
                 {
-                    if(player.currentHP > 0)
-                    {
-                    Console.WriteLine("It's " + player.name + "'s turn.");
-                   player.DoTurn(players, allies, enemies);
-                    }
-                    if (player.currentHP < 0) 
-                    {
-                        Console.WriteLine($"{player.name} has died.");
-                    }
+                    
+                        if (player.currentHP > 0)
+                        {
+                            Console.WriteLine("It's " + player.name + "'s turn.");
+                            player.DoTurn(players, allies, enemies);
+                        }
+                        if (player.currentHP < 0)
+                        {
+                            Console.WriteLine($"{player.name} has died.");
+                        }
+                    
                 }
 
                 //Enemies
@@ -64,12 +70,19 @@ namespace Console_RPG
                 if (players.TrueForAll(player => player.currentHP <= 0))
                 {
                     Console.WriteLine("You failed... how dare you fail. THAT'S A SKILL ISSUE!!!");
+                    Player.Apple.stats = Player.Elppa.stats;
+                    Player.PrincessAgave.stats = Player.EvagaSsecnirp.stats;
+                    Ally.Cavity.stats = Ally.Ytivac.stats;
                     break;
                 }
 
                 if (enemies.TrueForAll(enemy => enemy.currentHP <= 0))
                 {
                     Console.WriteLine($"You actually survived... Congratulations.");
+                    Player.Apple.stats = Player.Elppa.stats;
+                    Player.PrincessAgave.stats = Player.EvagaSsecnirp.stats;
+                    Ally.Cavity.stats = Ally.Ytivac.stats;
+
                     break;
                 }
             }

@@ -39,25 +39,20 @@ namespace Console_RPG
                 if (userInput == "BUY")
                 {
                     Item item = ChooseItem(this.items);
-                    if (item.shopPrice > Player.MONEY)
-                    {
-                        Console.ForegroundColor = ConsoleColor.Red;
-                    }
-                    else if (item.shopPrice < Player.MONEY)
-                    {
-                        Console.ForegroundColor = ConsoleColor.Green;
-                    }
+                    
                     if (Player.MONEY < item.shopPrice)
                     {
-                        Console.ForegroundColor = ConsoleColor.White;
+                        Console.ForegroundColor = ConsoleColor.Red;
                         Console.WriteLine("Try to come back later when you have some money.");
+                        Console.ForegroundColor = ConsoleColor.White;
                     }
                     else if (Player.MONEY >= item.shopPrice)
                     {
-                        Console.ForegroundColor = ConsoleColor.White;
+                        Console.ForegroundColor = ConsoleColor.Green;
                         Player.MONEY -= item.shopPrice;
                         Player.Inventory.Add(item);
                         Console.WriteLine($"You got a {item.name}.");
+                        Console.ForegroundColor = ConsoleColor.White;
                     }
                     else
                         Console.WriteLine("Too bad you wasted time.");

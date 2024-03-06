@@ -1,5 +1,6 @@
 ﻿namespace Console_RPG
 {
+    using System;
     class Weapon : Equipment
     {
         public int damageMulti;
@@ -19,6 +20,7 @@
             {
                 //Increases target attack if they equip the item.
                 target.stats.strength *= this.damageMulti;
+                Console.WriteLine($"{target.name} has gained {this.damageMulti} because of {this.name}'s defense boost! They now have {target.stats.strength}");
             }
             else
             {

@@ -1,4 +1,7 @@
-﻿namespace Console_RPG
+﻿using System.Runtime.Intrinsics.X86;
+using System;
+
+namespace Console_RPG
 {
     class Armor : Equipment
     {
@@ -19,6 +22,7 @@
             {
                 //Increases target defense if they equip the item.
                 target.stats.defense *= this.defenseMulti;
+                Console.WriteLine($"{target.name} has gained {this.defenseMulti} because of {this.name}'s defense boost! They now have {target.stats.defense}");
             }
             else
             {
