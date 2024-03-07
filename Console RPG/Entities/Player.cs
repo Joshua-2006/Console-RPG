@@ -60,7 +60,8 @@ namespace Console_RPG
                 Console.WriteLine($"{i + 1} : {choices[i].name}");
             }
             // Let user pick choice.
-            int index = Convert.ToInt32(Console.ReadLine());
+            string userInput = Console.ReadLine();
+            int index = Convert.ToInt32(userInput);
             return choices[index - 1];
         }
         public override void Attack(Entity target)
