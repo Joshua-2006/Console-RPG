@@ -13,7 +13,17 @@ namespace Console_RPG
        public static Enemy CandyKnight = new Enemy("Candy Knight", 150, 100, new Stats(50, 80, 60), 5, 50);
        public static Enemy Cavitee = new Enemy("Cavitee", 50, 100, new Stats(80, 20, 50), 5, 50);
        public static Enemy Hole = new Enemy("Hole", 10, 0, new Stats(100, 100, 100), 5, 50);
-       public static Enemy TheBonder = new Enemy("The Bonder", 100000, 100000, new Stats(10000, 10000, 10000), 10000, 10000);
+       public static Enemy Pokemon = new Enemy("Random Pokemon", 100, 100, new Stats(100, 100, 100), 10, 1000);
+        public static Enemy Pokemon1 = new Enemy("Random Pokemon", 100, 100, new Stats(100, 100, 100), 10, 1000);
+        public static Enemy Pokemon2 = new Enemy("Random Pokemon", 100, 100, new Stats(100, 100, 100), 10, 1000);
+        public static Enemy PhoenixWright = new Enemy("Phoenix Wright", 1000, 1000, new Stats(1000, 1000, 1000), 100, 1000);
+        public static Enemy Skylander = new Enemy("Spyro", 5000, 5000, new Stats(5000, 5000, 5000), 150, 5000);
+        public static Enemy Skylander1 = new Enemy("Stealth Elf", 5000, 5000, new Stats(5000, 5000, 5000), 150, 5000);
+        public static Enemy Skylander2 = new Enemy("Eruptor", 5000, 5000, new Stats(5000, 5000, 5000), 150, 5000);
+        public static Enemy Jax = new Enemy("Jax", 10000, 10000, new Stats(7500, 7500, 7500), 100, 7500);
+        public static Enemy Ethan = new Enemy("Ethan", 10000, 10000, new Stats(7500, 7500, 7500), 100, 7500);
+        public static Enemy Andrew = new Enemy("Andrew", 10000, 10000, new Stats(7500, 7500, 7500), 100, 7500);
+        public static Enemy Toby = new Enemy("Toby", 10000, 10000, new Stats(7500, 7500, 7500), 100, 7500);
 
         public int debuff;
         public int coins;

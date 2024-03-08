@@ -34,7 +34,7 @@ namespace Console_RPG
             while (true)
             {
                 Console.WriteLine("What do you want to do?");
-                Console.WriteLine("BUY, STEAL, LEAVE, SELL, TRY TO UNALIVE");
+                Console.WriteLine("BUY, LEAVE, SELL, TALK");
                 string userInput = Console.ReadLine();
                 if (userInput == "BUY")
                 {
@@ -57,25 +57,9 @@ namespace Console_RPG
                     else
                         Console.WriteLine("Too bad you wasted time.");
                 }
-                else if (userInput == "STEAL")
-                {
-                    Item item = ChooseItem(this.items);
-                    Player.Inventory.Add(item);
-                    Console.WriteLine($"You stole an {item.name}.");
-                    if (item.shopPrice > 1)
-                    {
-                        Console.WriteLine("Well... now you die.");
-                    }
-                    new Battle(new List<Enemy> { Enemy.TheBonder });
-                }
                 else if (userInput == "LEAVE")
                 {
                     break;
-                }
-                else if (userInput == "TRY TO UNALIVE")
-                {
-                    new Battle(new List<Enemy> {Enemy.TheBonder});
-                    
                 }
                 else if (userInput == "SELL")
                 {
@@ -83,10 +67,14 @@ namespace Console_RPG
                     Player.MONEY += item.shopPrice;
                     Player.Inventory.Remove(item);
                 }
+                else if (userInput == "TALK")
+                {
+                    Console.WriteLine($"{this.dialogue} \n {this.moredialogue}");
+                }
                 else
                 {
                     Console.WriteLine("You just wasted all of that time dang...");
-                    System.Threading.Thread.Sleep(10000);
+                    System.Threading.Thread.Sleep(1000);
                     Console.WriteLine("Well you waited... why?");
                 }
             }
@@ -99,7 +87,7 @@ namespace Console_RPG
             // Iterate through each choice.
             for (int i = 0; i < choices.Count; i++)
             {
-                Console.WriteLine($"{i + 1} : {choices[i].name} (*{choices[i].shopPrice})");
+                Console.WriteLine($"{i + 1} : {choices[i].name} (*{choices[i].shopPrice}) ({choices[i].description})");
             }
             // Let user pick choice.
             int index = Convert.ToInt32(Console.ReadLine());

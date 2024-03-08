@@ -7,6 +7,7 @@ namespace Console_RPG
     {
        public static Ally Cavity = new Ally("Cavity", 50, 50, new Stats(200, 40, 80), 10, 50);
         public static Ally Ytivac = new Ally("Cavity", 50, 50, new Stats(200, 40, 80), 10, 50);
+        public static Ally Derek = new Ally("Derek", 100000, 100000, new Stats(1000000, 1000000, 1000000), 1000000, 1000000);
         public int DoT;
         public int Item;
         public Ally(string name, int hp, int mana, Stats stats, int DoT, int Item) : base(name, hp, mana, stats)

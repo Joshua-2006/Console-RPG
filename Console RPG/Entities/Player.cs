@@ -11,7 +11,7 @@ namespace Console_RPG
         public static List<Item> Inventory = new List<Item>() { };
         public static int MONEY = 0;
 
-         public static Player Apple = new Player("Apple", hp: 100, mana: 100, new Stats(speed: 90, strength: 100, defense: 50), buff: 100, heal: 100);
+        public static Player Apple = new Player("Apple", hp: 100, mana: 100, new Stats(speed: 90, strength: 100, defense: 50), buff: 100, heal: 100);
         public static Player Elppa = new Player("Apple", hp: 100, mana: 100, new Stats(speed: 90, strength: 100, defense: 50), buff: 100, heal: 100);
         public static Player PrincessAgave = new Player("Princess Agave", 200, 200, new Stats(60, 100, 50), 500, 500);
         public static Player EvagaSsecnirp = new Player("Princess Agave", 200, 200, new Stats(60, 100, 50), 500, 500);
@@ -25,9 +25,9 @@ namespace Console_RPG
         }
         public void Buff(Entity target)
         {
-             
-                int buff = target.stats.strength += target.stats.strength + this.buff;
-                Console.WriteLine($"{target.name} had buffed themself for {buff} and now has {target.stats.strength}!");  
+
+            int buff = target.stats.strength += target.stats.strength + this.buff;
+            Console.WriteLine($"{target.name} had buffed themself for {buff} and now has {target.stats.strength}!");
         }
         public void SUPERBUFF(Entity target)
         {
@@ -38,6 +38,11 @@ namespace Console_RPG
         {
             int HPRegained = target.currentHP += this.heal + this.stats.strength;
             Console.WriteLine($"{target.name} healed for {HPRegained} and now has {target.currentHP} amount of HP!");
+        }
+        public void SUPERHeal(Entity target)
+        {
+            int HPR = target.currentHP = this.heal * this.stats.strength;
+            Console.WriteLine($"{target.name} healed for {HPR} and now has {target.currentHP} amount of HP!");
         }
         public override Entity ChooseTarget(List<Entity> choices)
         {
@@ -73,7 +78,7 @@ namespace Console_RPG
         public override void DoTurn(List<Player> players, List<Ally> allies, List<Enemy> enemies)
         {
             Console.WriteLine($"You can choose to ATTACK, USE ITEM, HEAL, BUFF, or STATS");
-           string choice = Console.ReadLine();
+            string choice = Console.ReadLine();
             if (choice == "ATTACK")
             {
                 Entity target = ChooseTarget(enemies.Cast<Entity>().ToList());
@@ -124,9 +129,9 @@ namespace Console_RPG
                     Buff(target);
                     DoTurn(players, allies, enemies);
                 }
-                
+
             }
-            else if (choice == "SUPER BUFF")
+            else if (choice == "SUPERBUFF")
             {
                 Console.WriteLine("Would you like to buff a PLAYER or ALLY");
                 choice = Console.ReadLine();
@@ -152,54 +157,71 @@ namespace Console_RPG
                 {
                     Entity target = ChooseTarget(players.Cast<Entity>().ToList());
                     Heal(target);
-                    
+
                 }
                 else if (choice == "ALLY")
                 {
                     Entity target = ChooseTarget(allies.Cast<Entity>().ToList());
                     Heal(target);
-                    
+
                 }
-               
-               
-            }
-            else if (choice == "STATS")
-            {
-                Console.WriteLine("Would you like to view a PLAYER, ALLY, or ENEMY's stats?");
-                choice = Console.ReadLine();
-                if (choice == "PLAYER")
+                else if (choice == "SUPERHEAL")
                 {
-                    Entity target = ChooseTarget(players.Cast<Entity>().ToList());
-                    Console.WriteLine($"These are {target.name} stats.");
-                    Console.WriteLine($"{target.currentHP}, {target.stats.strength}, {target.stats.defense}, {target.stats.speed}. These are {target.name}'s stats!");
-                    DoTurn(players, allies, enemies);
+                    Console.WriteLine("Would you like to heal a PLAYER or ALLY");
+                    choice = Console.ReadLine();
+                    if (choice == "PLAYER")
+                    {
+                        Entity target = ChooseTarget(players.Cast<Entity>().ToList());
+                        SUPERHeal(target);
+
+                    }
+                    else if (choice == "ALLY")
+                    {
+                        Entity target = ChooseTarget(allies.Cast<Entity>().ToList());
+                        SUPERHeal(target);
+
+                    }
+
+
                 }
-                else if (choice == "ALLY")
+                else if (choice == "STATS")
                 {
-                    Entity target = ChooseTarget(allies.Cast<Entity>().ToList());
-                    Console.WriteLine($"These are {target.name} stats.");
-                    Console.WriteLine($"{target.currentHP}, {target.stats.strength}, {target.stats.defense}, {target.stats.speed}. These are {target.name}'s stats!");
-                    DoTurn(players, allies, enemies);
-                }
-                else if (choice == "ENEMY")
-                {
-                    Entity target = ChooseTarget(enemies.Cast<Entity>().ToList());
-                    Console.WriteLine($"These are {target.name} stats.");
-                    Console.WriteLine($"{target.currentHP}, {target.stats.strength}, {target.stats.defense}, {target.stats.speed}. These are {target.name}'s stats!");
-                    DoTurn(players, allies, enemies);
+                    Console.WriteLine("Would you like to view a PLAYER, ALLY, or ENEMY's stats?");
+                    choice = Console.ReadLine();
+                    if (choice == "PLAYER")
+                    {
+                        Entity target = ChooseTarget(players.Cast<Entity>().ToList());
+                        Console.WriteLine($"These are {target.name} stats.");
+                        Console.WriteLine($"{target.currentHP}, {target.stats.strength}, {target.stats.defense}, {target.stats.speed}. These are {target.name}'s stats!");
+                        DoTurn(players, allies, enemies);
+                    }
+                    else if (choice == "ALLY")
+                    {
+                        Entity target = ChooseTarget(allies.Cast<Entity>().ToList());
+                        Console.WriteLine($"These are {target.name} stats.");
+                        Console.WriteLine($"{target.currentHP}, {target.stats.strength}, {target.stats.defense}, {target.stats.speed}. These are {target.name}'s stats!");
+                        DoTurn(players, allies, enemies);
+                    }
+                    else if (choice == "ENEMY")
+                    {
+                        Entity target = ChooseTarget(enemies.Cast<Entity>().ToList());
+                        Console.WriteLine($"These are {target.name} stats.");
+                        Console.WriteLine($"{target.currentHP}, {target.stats.strength}, {target.stats.defense}, {target.stats.speed}. These are {target.name}'s stats!");
+                        DoTurn(players, allies, enemies);
+                    }
+                    else
+                    {
+                        DoTurn(players, allies, enemies);
+                    }
+
                 }
                 else
                 {
+                    Console.WriteLine("DON'T DO THAT AGAIN!");
                     DoTurn(players, allies, enemies);
                 }
 
             }
-            else
-            {
-                Console.WriteLine("DON'T DO THAT AGAIN!");
-                DoTurn(players, allies, enemies);
-            }
-            
         }
     }
 }
