@@ -9,8 +9,8 @@ namespace Console_RPG
     {
         public static Location CandyCastle = new Location("The Candy Castle", "King Cookie's castle. A place... that has been corrupted. The candy people here are not happy.", new Battle(new List<Enemy>() { Enemy.CandySoldier, Enemy.KingCookie, Enemy.CandyKnight}));
         public static Location RotLair = new Location("The Rot Lair", "A lair of pure evil and corruption. The \"root\" of all evil. We should probably not be here yet.", new Battle(new List<Enemy>() { Enemy.Cavitee, Enemy.ToothAche, Enemy.Hole }));
-        public static Location FruitLand = new Location("Fruitland", "A land that can resist the corruption. Full of fruit people like you.");
-        public static Location TheLink = new Location("The Link", "The center of the world, where the lands meet. And where your journey ends.", new Battle(new List<Enemy>() {Enemy.DragonFruit}));
+        public static Location FruitLand = new Location("Fruitland", "A land that can resist the corruption. Full of fruit people like you.", new Battle(new List<Enemy>() { Enemy.DragonFruit }));
+        public static Location TheLink = new Location("The Link", "The center of the world, where the lands meet. And where your journey ends.", new Shop("The Bonder", "Fate's Atlas", new List<Item>() { CookieItem.Cookie, CookieItem.BurntCookie, SugarItem.LegendaryCookie, SugarItem.ChocolateBar, VitaminItem.VitaminC, VitaminItem.Vitalizer, Armor.CandyCap, Weapon.SwordOfAttorneys }, "You have quite the journey ahead of you, don't you?", "Perhaps your journey shall end happily."));
         public static Location HardHouse = new Location("Apple's House", "The start of the journey. A place of happy memories that has not been corrupted yet.");
         public static Location TheJohn = new Location("The Janitorial Closet", "The closet in Apple's house.");
         public static Location PokePelago = new Location("The Poke Pelago", "What is a Pokemon thing doing here?", new Battle(new List<Enemy>() { Enemy.Pokemon, Enemy.Pokemon1, Enemy.Pokemon2 }));
@@ -74,6 +74,7 @@ namespace Console_RPG
             {
                 Console.WriteLine("You can enter SUPERHEAL and SUPERBUFF to do a lot more.");
             }
+           
             POI?.Resolve(entities, allies);
             if (this == GhoulsOfChaos)
             {

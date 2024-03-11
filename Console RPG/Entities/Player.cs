@@ -11,10 +11,10 @@ namespace Console_RPG
         public static List<Item> Inventory = new List<Item>() { };
         public static int MONEY = 0;
 
-        public static Player Apple = new Player("Apple", hp: 100, mana: 100, new Stats(speed: 90, strength: 100, defense: 50), buff: 100, heal: 100);
-        public static Player Elppa = new Player("Apple", hp: 100, mana: 100, new Stats(speed: 90, strength: 100, defense: 50), buff: 100, heal: 100);
-        public static Player PrincessAgave = new Player("Princess Agave", 200, 200, new Stats(60, 100, 50), 500, 500);
-        public static Player EvagaSsecnirp = new Player("Princess Agave", 200, 200, new Stats(60, 100, 50), 500, 500);
+        public static Player Apple = new Player("Apple", hp: 100, mana: 100, new Stats(speed: 90, strength: 100, defense: 100), buff: 100, heal: 100);
+        public static Player Elppa = new Player("Apple", hp: 100, mana: 100, new Stats(speed: 90, strength: 100, defense: 100), buff: 100, heal: 100);
+        public static Player PrincessAgave = new Player("Princess Agave", 200, 200, new Stats(60, 150, 150), 500, 500);
+        public static Player EvagaSsecnirp = new Player("Princess Agave", 200, 200, new Stats(60, 150, 150), 500, 500);
 
         public int buff;
         public int heal;
